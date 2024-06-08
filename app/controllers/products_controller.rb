@@ -18,6 +18,8 @@ class ProductsController < ApplicationController
     else
       render json: { errors: product.errors.full_messages }, status: :unprocessable_entity
     end
+  rescue ActionDispatch::Http::Parameters::ParseError
+    render json: { error: 'Invalid JSON' }, status: :bad_request
   end
 
   def update
